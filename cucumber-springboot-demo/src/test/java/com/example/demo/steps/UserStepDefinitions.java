@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import junit.framework.Assert;
 import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,12 +72,11 @@ public class UserStepDefinitions {
     @Given("^I make a search for user (\\d+)$")
     public void iMakeSearchForUser(int userId) {
         lastResponse = client.get("/users/" + userId, null);
-        if(HttpStatus.SC_NOT_FOUND == lastResponse.getStatusCode()) {
-            System.out.println("User with ID " + userId + " not found.");
+        if(!Objects.equals(HttpStatus.SC_NOT_FOUND, lastResponse.getStatusCode())) {
+            Map<String, Object> dataMap = lastResponse.jsonPath().getMap("data");
+            Integer id = (Integer) dataMap.get("id");
+            Assert.assertEquals(id, Integer.valueOf(userId));
         }
-        Map<String, Object> dataMap = lastResponse.jsonPath().getMap("data");
-        Integer id = (Integer) dataMap.get("id");
-        Assert.assertEquals(id, Integer.valueOf(userId));
     }
 
     @Then("^I should see the following user data$")
@@ -91,9 +91,72 @@ public class UserStepDefinitions {
         Assert.assertEquals(data.get("email"), email);
     }
 
-    @Then("^I receive error code (\\d+)$ in response")
+    @Then("^I receive error code (\\d+) in response$")
     public void errorResponseTest(int errorCode) {
-        Assert.assertEquals(HttpStatus.SC_NOT_FOUND, errorCode);
+        Assert.assertEquals(errorCode, lastResponse.getStatusCode());
+    }
+
+    @Given("^I create a user with following (.*) (.*)$")
+    public void iCreateUserWith(String name, String job) {
+        String requestBody = String.format("{\"name\":\"%s\",\"job\":\"%s\"}", name, job);
+        lastResponse = client.post("/users", requestBody);
+    }
+
+    @Then("^response should contain the following data$")
+    public void responseShouldContainData(DataTable dataTable) {
+        Assert.assertEquals("Response status should be 201", HttpStatus.SC_CREATED, lastResponse.getStatusCode());
+        
+        List<String> expectedFields = dataTable.row(0);
+        
+        for (String field : expectedFields) {
+            Object fieldValue = lastResponse.jsonPath().get(field);
+            Assert.assertNotNull("Field " + field + " should not be null", fieldValue);
+        }
+    }
+
+    @Given("^I login (successfully|unsuccessfully) with the following data$")
+    public void iLoginWithCredentials(String loginType, DataTable dataTable) {
+        List<String> credentials = dataTable.row(1);
+        String email = credentials.get(0);
+        String password = credentials.get(1);
+        
+        String requestBody = String.format("{\"email\":\"%s\",\"password\":\"%s\"}", email, null == password ? "" : password);
+        lastResponse = client.post("/login", requestBody);
+    }
+
+    @Then("^I should get a response code of (\\d+)$")
+    public void iShouldGetResponseCode(int expectedStatusCode) {
+        Assert.assertEquals(expectedStatusCode, lastResponse.getStatusCode());
+    }
+
+    @Then("^I should see the following response message:$")
+    public void iShouldSeeResponseMessage(DataTable dataTable) {
+        List<String> expectedMessages = dataTable.asList();
+        String responseBody = lastResponse.getBody().asString();
+        String expectedMsg = expectedMessages.toString().replace("\"", "").replace("[","").replace("]","").replace(": ",":");
+        String response = responseBody.replace("\"", "").replace("{","").replace("}","");
+
+        Assert.assertTrue("Response should contain: " + expectedMessages,
+                response.contains(expectedMsg));
+    }
+
+    @Given("^I wait for the user list to load$")
+    public void iWaitForUserListToLoad() {
+        lastResponse = client.get("/users?delay=3", null);
+        Assert.assertEquals("Response should be successful", HttpStatus.SC_OK, lastResponse.getStatusCode());
+    }
+
+    @Then("^I should see that every user has a unique id$")
+    public void iShouldSeeUniqueUserIds() {
+        List<Map<String, Object>> users = lastResponse.jsonPath().getList("data");
+        List<Integer> userIds = new ArrayList<>();
+        
+        for (Map<String, Object> user : users) {
+            Integer userId = (Integer) user.get("id");
+            Assert.assertNotNull("User ID should not be null", userId);
+            Assert.assertFalse("User ID should be unique", userIds.contains(userId));
+            userIds.add(userId);
+        }
     }
 
 }

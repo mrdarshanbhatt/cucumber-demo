@@ -13,18 +13,41 @@ public class ApiClient {
     @Autowired
     private TestProperties testProperties;
 
-    public ApiClient(String baseUri) {
-        RestAssured.baseURI = baseUri;
+    public ApiClient(String baseUrl) {
+        RestAssured.baseURI = baseUrl;
+    }
+
+    private void configureRestAssured() {
+        if (testProperties != null) {
+            RestAssured.baseURI = testProperties.getBaseUrl();
+            RestAssured.config = RestAssured.config()
+                .httpClient(RestAssured.config().getHttpClientConfig()
+                    .setParam("http.connection.timeout", testProperties.getTimeout())
+                    .setParam("http.socket.timeout", testProperties.getTimeout()));
+        }
     }
 
     public Response get(String path, Map<String, ?> params) {
+        configureRestAssured();
         if (params == null || params.isEmpty()) {
-            return RestAssured.given().header(testProperties.getApiKey(), testProperties.getApiKeyValue()).contentType(ContentType.JSON).when().get(path).andReturn();
+            return RestAssured.given()
+                .header(testProperties.getApiKey(), testProperties.getApiKeyValue())
+                .contentType(ContentType.JSON)
+                .when().get(path).andReturn();
         }
-        return RestAssured.given().queryParams(params).header(testProperties.getApiKey(), testProperties.getApiKeyValue()).contentType(ContentType.JSON).when().get(path).andReturn();
+        return RestAssured.given()
+            .queryParams(params)
+            .header(testProperties.getApiKey(), testProperties.getApiKeyValue())
+            .contentType(ContentType.JSON)
+            .when().get(path).andReturn();
     }
 
     public Response post(String path, Object body) {
-        return RestAssured.given().header(testProperties.getApiKey(), testProperties.getApiKeyValue()).contentType(ContentType.JSON).body(body).when().post(path).andReturn();
+        configureRestAssured();
+        return RestAssured.given()
+            .header(testProperties.getApiKey(), testProperties.getApiKeyValue())
+            .contentType(ContentType.JSON)
+            .body(body)
+            .when().post(path).andReturn();
     }
 }
