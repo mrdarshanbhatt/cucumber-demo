@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><testng-results failed="0" passed="0" skipped="8" total="8">
+<suite duration-ms="0" name="cucumber.runtime.formatter.TestNGFormatter">
+<test duration-ms="0" name="cucumber.runtime.formatter.TestNGFormatter">
+<class name="API test">
+<test-method duration-ms="0" finished-at="2026-02-01T18:53:24Z" name="Should see LIST USERS of all existing users" started-at="2026-02-01T18:53:24Z" status="SKIP"/>
+<test-method duration-ms="0" finished-at="2026-02-01T18:53:24Z" name="Should see SINGLE USER data" started-at="2026-02-01T18:53:24Z" status="SKIP"/>
+<test-method duration-ms="0" finished-at="2026-02-01T18:53:24Z" name="Should see SINGLE USER NOT FOUND error code" started-at="2026-02-01T18:53:24Z" status="SKIP"/>
+<test-method duration-ms="0" finished-at="2026-02-01T18:53:24Z" name="CREATE a user" started-at="2026-02-01T18:53:24Z" status="SKIP"/>
+<test-method duration-ms="0" finished-at="2026-02-01T18:53:24Z" name="CREATE a user_2" started-at="2026-02-01T18:53:24Z" status="SKIP"/>
+<test-method duration-ms="0" finished-at="2026-02-01T18:53:24Z" name="LOGIN - SUCCESSFUL by a user" started-at="2026-02-01T18:53:24Z" status="SKIP"/>
+<test-method duration-ms="0" finished-at="2026-02-01T18:53:24Z" name="LOGIN - UNSUCCESSFUL by a user" started-at="2026-02-01T18:53:24Z" status="SKIP"/>
+<test-method duration-ms="0" finished-at="2026-02-01T18:53:24Z" name="Should see the list of users with DELAYED RESPONSE" started-at="2026-02-01T18:53:24Z" status="SKIP"/>
+</class>
+</test>
+</suite>
+</testng-results>

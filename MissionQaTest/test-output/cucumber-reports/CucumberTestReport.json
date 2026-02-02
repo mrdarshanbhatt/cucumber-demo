@@ -1,0 +1,346 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "comments": [
+          {
+            "line": 2,
+            "value": "# Please visit https://reqres.in/"
+          }
+        ],
+        "line": 4,
+        "name": "Should see LIST USERS of all existing users",
+        "description": "",
+        "id": "api-test;should-see-list-users-of-all-existing-users",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 5,
+            "name": "I get the default list of users for on 1st page",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 6,
+            "name": "I get the list of all users within every page",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 7,
+            "name": "I should see total users count equals the number of user ids",
+            "match": {},
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "line": 10,
+        "name": "Should see SINGLE USER data",
+        "description": "",
+        "id": "api-test;should-see-single-user-data",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 11,
+            "name": "I make a search for user 3",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 12,
+            "name": "I should see the following user data",
+            "match": {},
+            "rows": [
+              {
+                "cells": [
+                  "first_name",
+                  "email"
+                ],
+                "line": 13
+              },
+              {
+                "cells": [
+                  "Emma",
+                  "emma.wong@reqres.in"
+                ],
+                "line": 14
+              }
+            ],
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "line": 17,
+        "name": "Should see SINGLE USER NOT FOUND error code",
+        "description": "",
+        "id": "api-test;should-see-single-user-not-found-error-code",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 18,
+            "name": "I make a search for user 55",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 19,
+            "name": "I receive error code 404 in response",
+            "match": {},
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "line": 29,
+        "name": "CREATE a user",
+        "description": "",
+        "id": "api-test;create-a-user;;2",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 23,
+            "name": "I create a user with following Peter Manager",
+            "match": {},
+            "matchedColumns": [
+              0,
+              1
+            ],
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 24,
+            "name": "response should contain the following data",
+            "match": {},
+            "rows": [
+              {
+                "cells": [
+                  "name",
+                  "job",
+                  "id",
+                  "createdAt"
+                ],
+                "line": 25
+              }
+            ],
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "line": 30,
+        "name": "CREATE a user",
+        "description": "",
+        "id": "api-test;create-a-user;;3",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 23,
+            "name": "I create a user with following Liza Sales",
+            "match": {},
+            "matchedColumns": [
+              0,
+              1
+            ],
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 24,
+            "name": "response should contain the following data",
+            "match": {},
+            "rows": [
+              {
+                "cells": [
+                  "name",
+                  "job",
+                  "id",
+                  "createdAt"
+                ],
+                "line": 25
+              }
+            ],
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "line": 33,
+        "name": "LOGIN - SUCCESSFUL by a user",
+        "description": "",
+        "id": "api-test;login---successful-by-a-user",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 34,
+            "name": "I login unsuccessfully with the following data",
+            "match": {},
+            "rows": [
+              {
+                "cells": [
+                  "Email",
+                  "Password"
+                ],
+                "line": 35
+              },
+              {
+                "cells": [
+                  "eve.holt@reqres.in",
+                  "cityslicka"
+                ],
+                "line": 36
+              }
+            ],
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 37,
+            "name": "I should get a response code of 200",
+            "match": {},
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "line": 39,
+        "name": "LOGIN - UNSUCCESSFUL by a user",
+        "description": "",
+        "id": "api-test;login---unsuccessful-by-a-user",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 40,
+            "name": "I login unsuccessfully with the following data",
+            "match": {},
+            "rows": [
+              {
+                "cells": [
+                  "Email",
+                  "Password"
+                ],
+                "line": 41
+              },
+              {
+                "cells": [
+                  "eve.holt@reqres.in",
+                  ""
+                ],
+                "line": 42
+              }
+            ],
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 43,
+            "name": "I should get a response code of 400",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 44,
+            "name": "I should see the following response message:",
+            "match": {},
+            "rows": [
+              {
+                "cells": [
+                  "\"error\": \"Missing password\""
+                ],
+                "line": 45
+              }
+            ],
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 47,
+        "name": "Should see the list of users with DELAYED RESPONSE",
+        "description": "",
+        "id": "api-test;should-see-the-list-of-users-with-delayed-response",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 48,
+            "name": "I wait for the user list to load",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 49,
+            "name": "I should see that every user has a unique id",
+            "match": {},
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "API test",
+    "description": "",
+    "id": "api-test",
+    "keyword": "Feature",
+    "uri": "src/test/java/API-Test.feature"
+  }
+]

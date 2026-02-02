@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2026-02-01T18:53:24 IST" name="Surefire suite" finished-at="2026-02-01T18:53:24 IST" duration-ms="587">
+    <groups>
+      <group name="cucumber">
+        <method signature="RunnerTest.feature(cucumber.api.testng.CucumberFeatureWrapper)[pri:0, instance:mission.RunnerTest@a4102b8]" name="feature" class="mission.RunnerTest"/>
+      </group> <!-- cucumber -->
+    </groups>
+    <test started-at="2026-02-01T18:53:24 IST" name="Surefire test" finished-at="2026-02-01T18:53:24 IST" duration-ms="587">
+      <class name="mission.RunnerTest">
+        <test-method is-config="true" signature="setUpClass()[pri:0, instance:mission.RunnerTest@a4102b8]" started-at="2026-02-01T18:53:24 IST" name="setUpClass" finished-at="2026-02-01T18:53:24 IST" duration-ms="200" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpClass -->
+        <test-method signature="feature(cucumber.api.testng.CucumberFeatureWrapper)[pri:0, instance:mission.RunnerTest@a4102b8]" started-at="2026-02-01T18:53:24 IST" name="feature" description="Runs Cucumber Feature" data-provider="features" finished-at="2026-02-01T18:53:24 IST" duration-ms="176" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[API test]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- feature -->
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:mission.RunnerTest@a4102b8]" started-at="2026-02-01T18:53:24 IST" name="tearDownClass" finished-at="2026-02-01T18:53:24 IST" duration-ms="91" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownClass -->
+      </class> <!-- mission.RunnerTest -->
+    </test> <!-- Surefire test -->
+  </suite> <!-- Surefire suite -->
+</testng-results>
